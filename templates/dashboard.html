@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NexGen ERP - Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body class="dashboard-body">
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar glass-effect">
+            <div class="sidebar-header">
+                <h2><i class="fa-solid fa-cube logo-icon"></i> NexGen ERP</h2>
+            </div>
+            <ul class="nav-links">
+                <li class="active" data-target="overview"><i class="fa-solid fa-chart-pie"></i> <span>Overview</span></li>
+                <li data-target="inventory"><i class="fa-solid fa-boxes-stacked"></i> <span>Inventory</span></li>
+                <li data-target="students"><i class="fa-solid fa-user-graduate"></i> <span>Student ERP</span></li>
+                <li data-target="billing"><i class="fa-solid fa-file-invoice-dollar"></i> <span>Billing</span></li>
+            </ul>
+            <div class="sidebar-footer">
+                <button id="logoutBtn" class="btn-secondary"><i class="fa-solid fa-arrow-right-from-bracket"></i> <span>Logout</span></button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="top-header glass-effect">
+                <div class="header-left">
+                    <button id="mobileMenuBtn" class="mobile-menu-btn"><i class="fa-solid fa-bars"></i></button>
+                    <h1 id="pageTitle">Dashboard Overview</h1>
+                </div>
+                <div class="header-right">
+                    <div class="notification-bell">
+                        <i class="fa-regular fa-bell"></i>
+                        <span class="badge">3</span>
+                    </div>
+                    <div class="user-profile">
+                        <div class="user-info">
+                            <span class="user-name" id="userNameDisplay">Admin User</span>
+                            <span class="user-role">Administrator</span>
+                        </div>
+                        <div class="avatar"><i class="fa-solid fa-user"></i></div>
+                    </div>
+                </div>
+            </header>
+
+            <div class="content-area">
+                <!-- Overview Section -->
+                <section id="overview" class="module-section active">
+                    <div class="stats-grid">
+                        <div class="stat-card glass-effect animate-up">
+                            <div class="stat-icon inventory-icon"><i class="fa-solid fa-boxes"></i></div>
+                            <div class="stat-details">
+                                <h3>Total Stock Items</h3>
+                                <p id="statInventory">0</p>
+                            </div>
+                        </div>
+                        <div class="stat-card glass-effect animate-up" style="animation-delay: 0.1s">
+                            <div class="stat-icon student-icon"><i class="fa-solid fa-users"></i></div>
+                            <div class="stat-details">
+                                <h3>Active Students</h3>
+                                <p id="statStudents">0</p>
+                            </div>
+                        </div>
+                        <div class="stat-card glass-effect animate-up" style="animation-delay: 0.2s">
+                            <div class="stat-icon billing-icon"><i class="fa-solid fa-sack-dollar"></i></div>
+                            <div class="stat-details">
+                                <h3>Total Sales</h3>
+                                <p id="statSales">$0.00</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="overview-charts animate-up" style="animation-delay: 0.3s">
+                        <div class="chart-container glass-effect">
+                            <h3>Revenue Overview</h3>
+                            <div class="placeholder-chart">
+                                <div class="bar" style="height: 40%"></div>
+                                <div class="bar" style="height: 60%"></div>
+                                <div class="bar" style="height: 30%"></div>
+                                <div class="bar" style="height: 80%"></div>
+                                <div class="bar" style="height: 50%"></div>
+                                <div class="bar" style="height: 90%"></div>
+                                <div class="bar" style="height: 70%"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="quick-actions-container glass-effect">
+                            <h3>Quick Actions</h3>
+                            <div class="quick-actions">
+                                <button class="btn-action"><i class="fa-solid fa-plus"></i> Add Item</button>
+                                <button class="btn-action"><i class="fa-solid fa-user-plus"></i> New Student</button>
+                                <button class="btn-action"><i class="fa-solid fa-file-invoice"></i> Create Invoice</button>
+                                <button class="btn-action"><i class="fa-solid fa-file-export"></i> Export Report</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Inventory Section -->
+                <section id="inventory" class="module-section">
+                    <div class="table-container glass-effect animate-up">
+                        <div class="table-header">
+                            <h3>Inventory Management</h3>
+                            <div class="table-actions">
+                                <div class="search-box">
+                                    <i class="fa-solid fa-search"></i>
+                                    <input type="text" placeholder="Search items...">
+                                </div>
+                                <button class="btn-primary btn-sm"><i class="fa-solid fa-plus"></i> Add Item</button>
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Item Name</th>
+                                        <th>Category</th>
+                                        <th>Quantity</th>
+                                        <th>Unit Price</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="inventoryTableBody">
+                                    <tr><td colspan="7" class="loading-cell"><div class="spinner"></div></td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Students Section -->
+                <section id="students" class="module-section">
+                    <div class="table-container glass-effect animate-up">
+                        <div class="table-header">
+                            <h3>Student ERP</h3>
+                            <div class="table-actions">
+                                <div class="search-box">
+                                    <i class="fa-solid fa-search"></i>
+                                    <input type="text" placeholder="Search students...">
+                                </div>
+                                <button class="btn-primary btn-sm"><i class="fa-solid fa-plus"></i> Add Student</button>
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Student ID</th>
+                                        <th>Name</th>
+                                        <th>Course</th>
+                                        <th>Enrollment Date</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="studentsTableBody">
+                                    <tr><td colspan="6" class="loading-cell"><div class="spinner"></div></td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Billing Section -->
+                <section id="billing" class="module-section">
+                    <div class="table-container glass-effect animate-up">
+                        <div class="table-header">
+                            <h3>Billing & Invoices</h3>
+                            <div class="table-actions">
+                                <div class="search-box">
+                                    <i class="fa-solid fa-search"></i>
+                                    <input type="text" placeholder="Search invoices...">
+                                </div>
+                                <button class="btn-primary btn-sm"><i class="fa-solid fa-plus"></i> New Invoice</button>
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Invoice #</th>
+                                        <th>Customer Name</th>
+                                        <th>Date</th>
+                                        <th>Amount</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="billingTableBody">
+                                    <tr><td colspan="6" class="loading-cell"><div class="spinner"></div></td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+        </main>
+    </div>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
