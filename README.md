@@ -1,6 +1,5 @@
 # Synergy Enterprise ERP System
 
-![Dashboard Preview](/Users/sanjaykurakul/.gemini/antigravity/brain/f930752c-1145-497e-a674-543dab52144a/dashboard_mockup_1777785675302.png)
 
 ## Overview
 Synergy Enterprise ERP is a comprehensive, Flask-based backend web application designed to streamline business operations. Built with modern web development practices, it features an interactive dashboard, robust data management, and an elegant user interface. This project combines various operational modules into a single, cohesive system, simulating real-world SAP-style business processes.
@@ -11,7 +10,6 @@ Synergy Enterprise ERP is a comprehensive, Flask-based backend web application d
 - **Admin Login:** Role-based access control ensuring secure entry into the dashboard.
 - **Session Management:** Safeguards user data and enforces secure sessions.
 
-![Login Page](/Users/sanjaykurakul/.gemini/antigravity/brain/f930752c-1145-497e-a674-543dab52144a/login_page_mockup_1777785660335.png)
 
 ### 2. Interactive Dashboard
 - **Real-time Statistics:** View summary metrics such as Total Inventory, Active Students, and Total Sales.
